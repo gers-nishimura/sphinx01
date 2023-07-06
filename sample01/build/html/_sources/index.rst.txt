@@ -9,6 +9,7 @@ Contents:
     :glob:
 
     report/*
+    jupyter
 
 
 Indices and tables

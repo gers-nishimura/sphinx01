@@ -15,6 +15,43 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 
+# Below is to reduce font size in code block
+# \tiny         5pt
+# \scriptsize   7pt
+# \footnotesize 8pt
+# \small        9pt
+#
+
+
+from sphinx.highlighting import PygmentsBridge
+from pygments.formatters.latex import LatexFormatter
+
+class CustomLatexFormatter(LatexFormatter):
+    def __init__(self, **options):
+        super(CustomLatexFormatter, self).__init__(**options)
+        self.verboptions = r"formatcom=\scriptsize"
+
+PygmentsBridge.latex_formatter = CustomLatexFormatter
+
+# for jupyter-notebook
+
+from recommonmark.parser import CommonMarkParser
+
+source_parsers = {
+    '.md': CommonMarkParser,
+}
+
+from recommonmark.transform import AutoStructify
+
+github_doc_root = 'https://github.com/rtfd/recommonmark/tree/master/doc/'
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+            'url_resolver': lambda url: github_doc_root + url,
+            'auto_toc_tree_section': 'Contents',
+            }, True)
+    app.add_transform(AutoStructify)
+
+
 # -- Project information -----------------------------------------------------
 
 project = 'Sphinx勉強会'
@@ -31,6 +68,11 @@ release = '1.0.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.mathjax',
+    'sphinxcontrib.blockdiag',
+    'sphinxcontrib.actdiag',
+    'sphinx.ext.graphviz',
+    'nbsphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -48,15 +90,85 @@ language = 'ja'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+source_suffix = ['.rst', '.md']
 
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+# html_theme = 'alabaster'
+
+import sphinx_rtd_theme
+html_theme = 'sphinx_rtd_theme'
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+
+# -- Options for LaTeX output ---------------------------------------------
+
+latex_elements = {
+# The paper size ('letterpaper' or 'a4paper').
+'papersize': 'a4paper',
+
+# The font size ('10pt', '11pt' or '12pt').
+'pointsize': '12pt',
+
+
+# geometry
+'geometry': '\\usepackage[vmargin=2cm, hmargin=2cm]{geometry}',
+#babel
+'babel': '\\usepackage[japanese]{babel}',
+
+# Additional stuff for the LaTeX preamble.
+#\\usepackage[top=20truemm,bottom=20truemm,left=20truemm,right=20truemm]{geometry}
+
+'preamble': r'''
+
+\setlength\parindent{1zw}
+\renewcommand{\baselinestretch}{0.8}
+
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\usepackage{chemfig}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{center}
+    {\Large \@title} \par
+\end{center}
+\begin{flushright}
+    \@date \hspace{3zw} \@author \par
+\end{flushright}
+}
+
+\@addtoreset{equation}{section} \def\theequation{\thesection.\arabic{equation}}
+
+\makeatother
+
+\pagestyle{plain}
+\thispagestyle{plain}
+
+'''
+}
+
+latex_elements['tableofcontents'] = r'''
+\pagenumbering{arabic} % page numbering as arabic
+\pagestyle{normal} % page set to normal
+'''
+
+# Grouping the document tree into LaTeX files. List of tuples
+# (source start file, target name, title,
+#  author, documentclass [howto, manual, or own class]).
+# latex_documents = [
+#     (master_doc, 'output.tex', u'NewTitle',
+#     u'Fujisawa', 'howto'),
+# ]
+
+# Numbering tables and figures
+numfig=True
+numfig_secnum_depth=2
