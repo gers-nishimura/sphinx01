@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Sphinx勉強会'
-copyright = '2023, ERS・西村'
-author = 'ERS・西村'
+copyright = '2023, ERS西村'
+author = 'ERS西村'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'
