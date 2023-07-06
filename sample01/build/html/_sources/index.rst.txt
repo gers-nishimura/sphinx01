@@ -1,20 +1,42 @@
-.. Sphinx勉強会 documentation master file, created by
-   sphinx-quickstart on Thu Jul  6 14:12:33 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+============
+Sphinx勉強会
+============
 
-Welcome to Sphinx勉強会's documentation!
-========================================
+開催情報
+========
+* 日時： 2013/12/21 13:00-17:00
+* 場所： CoCoDe
+* 参加者： planset, ...
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+勉強会の内容
+============
+Sphinxの勉強会に参加してきました。
 
+Sphinxとは次のようなツールです。
 
+    Spihnxは、reStructuredText記法で書かれたテキストファイルをHTML、PDFやepubなどに変換するためのツールです。
 
-Indices and tables
-==================
+    Pythonの公式ドキュメントはSphinxを使って書かれています。
+    また、Python以外の多くのプロジェクトでもSphinxが利用されています。
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+勉強会では、勉強会のレポートを書きながらSphinxについて学びました。
+
+sphinxを利用するために必要なこと
+
+* テキスト*エディタ*
+* *Sphinx* の環境
+
+  * *python*
+  * (pip)
+  * (virtualenv)
+  * **sphinx**
+
+* コマンドラインツールへの多少の慣れ
+
+資料
+====
+* http://sphinx-doc.org/
+* `github <https://github.com>`_
+* Sphinx-users.jp_
+
+.. _Sphinx-users.jp: http://sphinx-users.jp/
