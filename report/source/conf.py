@@ -17,9 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'sample1'
-copyright = '2023, nishimura'
-author = 'nishimura'
+project = 'Sphinx勉強会レポート'
+copyright = '2023, 西村'
+author = '西村'
+
+# The full version, including alpha/beta/rc tags
+release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------
